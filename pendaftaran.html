@@ -1,0 +1,179 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<title>Pendaftaran</title>
+	<link rel="stylesheet" href="style.css">
+	<link rel="icon" href="Universitas_Brawijaya.png">
+</head>
+<body>
+	<nav>
+		<ul>
+			<li>
+				<a href="index.html">Profil UKM</a>
+			</li>
+			<li>
+				<a href="gallery.html">Gallery Kegiatan</a>
+			</li>
+			<li>
+				<a href="pendaftaran.html" class="active">Pendaftaran</a>
+			</li>
+			<li>
+				<a href="kontak.html">Kontak</a>
+			</li>
+			<a href="index.html">
+				<img src="Universitas_Brawijaya.png" width="50" style="float: right; padding: 5px;">
+			</a>
+		</ul>
+	</nav>
+	<form style="background-color: skyblue; padding: 10px;">
+	    <p style="font-size: 40px; font-weight: bold; text-align: center;">Pendaftaran</p>
+	    <table align="center">
+	    	
+	        <tr>
+	            <td>NIM</td>
+	            <td><input type="number" name="nim" id="nim" placeholder="201011402149" required></td>
+	        </tr>
+
+	        <tr>
+	            <td>NAMA</td>
+	            <td><input type="text" name="nama" id="nama" placeholder="Nixon Milo" required></td>
+	        </tr>
+
+	        <tr>
+	            <td>JENIS KELAMIN</td>
+                <td>
+                	<input type="radio" name="jenisKelamin" id="laki-laki" value="laki-laki" checked>
+                	<label for="laki-laki">Laki-laki</label>
+
+                	<input type="radio" name="jenisKelamin" id="perempuan" value="perempuan">
+                	<label for="perempuan">Perempuan</label>
+                </td>
+	        </tr>
+
+	        <tr>
+	            <td>PROGRAM STUDI</td>
+	            <td><input type="text" name="programStudi" id="programStudi" placeholder="Teknik Informatika" required></td>
+	        </tr>
+
+	        <tr>
+	            <td>UKM YANG INGIN DIIKUTI</td>
+	            <td>
+	            	<select name="ukm" id="ukm">
+		                <option>-- PILIH --</option>
+		                <option value="panahan">Panahan</option>
+		                <option value="futsal">Futsal</option>
+		                <option value="basket">Basket</option>
+		                <option value="paduan-suara">Paduan Suara</option>
+		                <option value="sepak-bola">Sepak Bola</option>
+	            	</select>
+	            </td>
+	        </tr>
+
+	        <tr>
+	            <td>HARI KEGIATAN</td>
+	            <td>
+	              <input name="hari[]" type="checkbox" value="senin">
+	              <label for="senin">
+	                Senin
+	              </label>
+	            
+	            
+	              <input name="hari[]" type="checkbox" value="selasa">
+	              <label for="selasa">
+	                Selasa
+	              </label>
+	            
+	            
+	              <input name="hari[]" type="checkbox" value="rabu">
+	              <label for="rabu">
+	                Rabu
+	              </label>
+	            
+	            
+	              <input name="hari[]" type="checkbox" value="kamis">
+	              <label for="kamis">
+	                Kamis
+	              </label>
+	            
+	            
+	              <input name="hari[]" type="checkbox" value="jumat">
+	              <label for="jumat">
+	                Jumat
+	              </label>
+	            </td>
+	        </tr>
+
+	        <tr>
+	            <td></td>
+	        
+	            <td>
+	            	<button type="button" onclick="return tampilkandata()" id="submit" class="btn btn-info">Submit</button>
+	            	<a href="index.html" class="btn btn-danger">Batal</a>
+	            </td>
+	        </tr>
+	    </table>
+	</form>
+
+	<div align="center" id="hasil"></div>
+
+	<footer style="bottom: 0; clear: both; position: relative; margin-top: 190px;">
+        <ul>
+        	<li>
+        		<p style="padding: 5px; margin-left: 10px;">Copyright © 2022 UKM BRAWIJAYA by Nixon Milo Hamonangan</p>
+        	</li>
+            <li style="float: right;">
+                <a href="https://www.facebook.com/nixon.milo">Facebook</a>
+            </li>
+
+            <li style="float: right;">
+                <a href="https://instagram.com/nixonmiloo">Instagram</a>
+            </li>
+        </ul>        
+	</footer>
+
+    <!-- JAVASCRIPT FILES -->
+    <script src="jquery-3.6.2.min.js"></script>
+    <script>
+        function tampilkandata() {
+            let nim  = document.getElementById('nim').value;
+            console.log(nim);
+
+            let nama  = document.getElementById('nama').value;
+            console.log(nama);
+
+            let jenisKelamin  = document.querySelector('input[name="jenisKelamin"]:checked').value;
+            console.log(jenisKelamin);
+
+            let programStudi  = document.getElementById('programStudi').value;
+            console.log(programStudi);
+
+            let ukm  = document.querySelector('#ukm').value;
+            console.log(ukm);
+
+            let hari  = [];
+            let checkboxes = document.getElementsByName('hari[]');
+            for (let i = 0; i< checkboxes.length; i++) {
+                if (checkboxes[i].checked) {
+                    hari.push(checkboxes[i].value);
+                }
+            }
+            console.log(hari);
+
+            document.getElementById('hasil').innerHTML = `
+                <h3>Selamat Anda Berhasil Mendaftar UKM!</h3>
+                <p><strong>NIM:</strong> `+nim+`</p>
+                <p><strong>Nama:</strong> `+nama+`</p>
+                <p><strong>Jenis Kelamin:</strong> `+jenisKelamin+`</p>
+                <p><strong>Program Studi:</strong> `+programStudi+`</p>
+                <p><strong>UKM yang akan diikuti:</strong> `+ukm+`</p>
+                <p><strong>Hari Kegiatan:</strong> `+hari+`</p>
+            `;
+            alert('Berhasil!');
+        }
+
+    </script>
+
+</body>
+</html>
